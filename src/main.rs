@@ -27,7 +27,11 @@ fn main() {
 
 	// Execute
 	let mut vm = brainfuck::Vm::new(code, input);
-	let output = vm.execute();
+	/* TODO: Error handling */
+	let output = vm.execute().unwrap();
 
-	// TODO: Print output to stdout
+	// Print output
+	let output = std::str::from_utf8(&output).unwrap();
+
+	print!("{}", output);
 }
