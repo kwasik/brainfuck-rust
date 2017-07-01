@@ -7,7 +7,7 @@ mod brainfuck;
 fn main() {
 	let args: Vec<_> = env::args().collect();
 	
-	// Make sure there's exactly one argument
+	// Display usage information if there's either too many or too few args
 	if args.len() < 2 || args.len() > 3 {
 		println!("Usage: {} code_file input_file", &args[0]);
 		println!("\tcode_file: file containing Brainfuck code");
@@ -25,9 +25,8 @@ fn main() {
 		File::open(&args[2]).unwrap().read_to_end(&mut input).unwrap();
 	}
 
-	// Execute
+	// Create VM and execute
 	let mut vm = brainfuck::Vm::new(code, input);
-	/* TODO: Error handling */
 	let output = vm.execute().unwrap();
 
 	// Print output
